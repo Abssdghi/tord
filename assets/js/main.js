@@ -1,3 +1,3 @@
 function handleClick() {
-    console.log("hahaha!")
+    document.getElementById('main-card').textContent = Math.round(Math.random()*100)+"%";
 }
