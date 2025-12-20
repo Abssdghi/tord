@@ -5,7 +5,6 @@ async function handleClick() {
     card.classList.add('text-center');
 
     try {
-        card.classList.add('rtl', 'font-arabic', 'text-lg', 'font-medium');
         const res = await axios.get('https://api.truthordarebot.xyz/api/dare');
         const question = res.data.question;
 
@@ -14,9 +13,9 @@ async function handleClick() {
 
         card.innerHTML = `
         <div class="flex flex-col gap-2">
-        <p class="text-text font-display text-lg">${question}</p>
+        <p class="text-text font-Comic text-xl lg:text-2xl">${question}</p>
         </br>
-        <p class="rtl font-arabic font-medium text-lg">${translated}</p>
+        <p class="text-text font-Playpen text-xl lg:text-2xl" dir="rtl">${translated}</p>
         </div>
         `;
 
