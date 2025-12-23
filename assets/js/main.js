@@ -21,20 +21,13 @@ async function req_to_baseurl(endpoint='dare') {
 }
 
 
-async function handleClick() {
-    const card = document.getElementById('main-card');
-
-    card.innerHTML = `<div class="w-8 h-8 border-4 border-primary border-t-secondary rounded-full animate-spin mx-auto"></div>`;
-    card.classList.add('text-center');
-
+async function handleClick(mode='truth') {
     try {
-        const res = await axios.get('https://api.truthordarebot.xyz/api/dare');
-        const question = res.data.question;
+        await go_loading()
+        const question = await req_to_baseurl(mode);
+        const translated = await translate(question);
 
-        const transres = await axios.get(`https://corsproxy.io/?url=https://ftapi.pythonanywhere.com/translate?sl=en&dl=fa&text=${question}`);
-        const translated = transres.data['destination-text'];
-
-        card.innerHTML = `
+        document.getElementById('main-card').innerHTML = `
         <div class="flex flex-col gap-2">
         <p class="text-text font-Comic text-xl lg:text-2xl">${question}</p>
         </br>
@@ -43,7 +36,7 @@ async function handleClick() {
         `;
 
     } catch (error) {
-        console.error('error in dare function:', error);
+        console.error('error in handleClick function:', error);
         card.textContent = "error";
     }
 }
